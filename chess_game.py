@@ -67,53 +67,26 @@ def update_board(board, current_player):
 
 
 def check_move(board, from_col, from_row, to_col, to_row, piece_to_move, move):
-    # Vérification pour les pions blancs
     if board[from_row][from_col] == 'wP':
-        # Mouvement vertical (sans capture)
         if to_col == from_col:
-            # Une case vers l'avant
             if to_row - from_row == 1 and board[to_row][to_col] == '. ':
                 return True
-            # Deux cases vers l'avant (premier mouvement seulement)
             if from_row == 1 and to_row - from_row == 2 and board[from_row + 1][from_col] == '. ' and board[to_row][to_col] == '. ':
                 return True
 
-        # Mouvement diagonal (capture)
         if abs(to_col - from_col) == 1 and to_row - from_row == 1 and board[to_row][to_col][0] == 'b':
             return True
 
-    # Vérification pour les pions noirs
     if board[from_row][from_col] == 'bP':
-        # Mouvement vertical (sans capture)
         if to_col == from_col:
-            # Une case vers l'avant
             if from_row - to_row == 1 and board[to_row][to_col] == '. ':
                 return True
-            # Deux cases vers l'avant (premier mouvement seulement)
             if from_row == 6 and from_row - to_row == 2 and board[from_row - 1][from_col] == '. ' and board[to_row][to_col] == '. ':
                 return True
 
-        # Mouvement diagonal (capture)
         if abs(to_col - from_col) == 1 and from_row - to_row == 1 and board[to_row][to_col][0] == 'w':
             return True
-
     return False
-
-
-def check_move1(board, from_col, from_row, to_col, to_row, piece_to_move, move):
-    # pawn
-    if from_row == 1 and board[from_row][from_col][0] == 'w' and piece_to_move[0] == move[0] or from_row == 6 and board[from_row][from_col][0] == 'b' and piece_to_move[0] == move[0]:
-        if 0 < abs(to_row - from_row) < 3:
-            return True 
-    
-    if board[from_row][from_col][1] == 'P':
-        if board[to_row][to_col] != '. ' and from_row != to_row:
-            return True
-    
-        if abs(to_row - from_row) == 1:
-            return True        
-        return False
-     
 
 
 def is_clear_path(board, from_row, from_col, to_row, to_col):
